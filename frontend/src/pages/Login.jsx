@@ -14,61 +14,67 @@ export default function Login() {
       return;
     }
 
+    // store login state
     localStorage.setItem("user", role);
 
+    // redirect based on role
     if (role === "recruiter") {
       navigate("/recruiter");
     } else {
       navigate("/seeker");
     }
 
+    // refresh navbar
     window.location.reload();
   };
 
   return (
     <div style={container}>
-  <div style={card}>
-    <h2 style={{ marginBottom: "20px" }}>Login</h2>
+      <div style={card}>
+        <h2 style={{ marginBottom: "20px" }}>Login</h2>
 
-    <input
-      placeholder="Email"
-      style={input}
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-    />
+        <input
+          type="email"
+          placeholder="Email"
+          style={input}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-    <input
-      type="password"
-      placeholder="Password"
-      style={input}
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-    />
+        <input
+          type="password"
+          placeholder="Password"
+          style={input}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-    <select
-      style={input}   // ✅ SAME STYLE as input
-      value={role}
-      onChange={(e) => setRole(e.target.value)}
-    >
-      <option value="">Select Role</option>
-      <option value="seeker">Job Seeker</option>
-      <option value="recruiter">Recruiter</option>
-    </select>
+        <select
+          style={input}
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="">Select Role</option>
+          <option value="seeker">Job Seeker</option>
+          <option value="recruiter">Recruiter</option>
+        </select>
 
-    <button onClick={handleLogin} style={button}>
-      Login
-    </button>
+        <button onClick={handleLogin} style={loginBtn}>
+          Login
+        </button>
 
-    <p style={{ marginTop: "15px" }}>
-      New user?{" "}
-      <span style={link} onClick={() => navigate("/signup")}>
-        Register
-      </span>
-    </p>
-  </div>
-</div>
+        <p style={{ marginTop: "15px" }}>
+          New user?{" "}
+          <span style={link} onClick={() => navigate("/signup")}>
+            Register
+          </span>
+        </p>
+      </div>
+    </div>
   );
 }
+
+/* ---------------- STYLES ---------------- */
 
 const container = {
   minHeight: "100vh",
@@ -80,27 +86,37 @@ const container = {
 
 const card = {
   background: "white",
-  padding: "30px",
-  borderRadius: "10px",
-  width: "320px",
-  boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+  padding: "35px",
+  paddingTop: "0px",
+  borderRadius: "12px",
+  width: "350px",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
   textAlign: "center"
 };
 
 const input = {
   width: "100%",
-  padding: "10px",
+  padding: "12px",
   margin: "10px 0",
-  borderRadius: "5px",
-  border: "1px solid #ddd"
+  borderRadius: "8px",
+  border: "1px solid #d1d5db",
+  fontSize: "14px"
 };
 
 const loginBtn = {
   width: "100%",
-  padding: "10px",
+  padding: "12px",
+  marginTop: "10px",
   background: "#2563eb",
   color: "white",
   border: "none",
-  borderRadius: "5px",
+  borderRadius: "8px",
+  fontSize: "15px",
   cursor: "pointer"
+};
+
+const link = {
+  color: "#2563eb",
+  cursor: "pointer",
+  fontWeight: "500"
 };
