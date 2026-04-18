@@ -4,52 +4,106 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    email: "",
-    password: ""
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    const user = users.find(
-      (u) => u.email === form.email && u.password === form.password
-    );
-
-    if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user));
-
-      if (user.role === "seeker") {
-        navigate("/seeker");
-      } else {
-        navigate("/recruiter");
-      }
-
-    } else {
-      alert("Invalid credentials ❌");
+  const handleLogin = () => {
+    if (!email || !password || !role) {
+      alert("Fill all fields");
+      return;
     }
+
+    localStorage.setItem("user", role);
+
+    if (role === "recruiter") {
+      navigate("/recruiter");
+    } else {
+      navigate("/seeker");
+    }
+
+    window.location.reload();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+    <div style={container}>
+      <div style={card}>
+        <h2>Login</h2>
 
-      <input
-        placeholder="Email"
-        onChange={(e) => setForm({...form, email:e.target.value})}
-        required
-      />
+        <input
+          placeholder="Email"
+          style={input}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setForm({...form, password:e.target.value})}
-        required
-      />
+        <input
+          type="password"
+          placeholder="Password"
+          style={input}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      <button>Login</button>
-    </form>
+        <select
+          style={input}
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="">Select Role</option>
+          <option value="seeker">Job Seeker</option>
+          <option value="recruiter">Recruiter</option>
+        </select>
+
+        <button onClick={handleLogin} style={loginBtn}>
+          Login
+        </button>
+
+        <p style={{ marginTop: "10px" }}>
+          New user?{" "}
+          <span
+            style={{ color: "#2563eb", cursor: "pointer" }}
+            onClick={() => navigate("/signup")}
+          >
+            Register
+          </span>
+        </p>
+      </div>
+    </div>
   );
 }
+
+const container = {
+  minHeight: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "#f5f7fa"
+};
+
+const card = {
+  background: "white",
+  padding: "30px",
+  borderRadius: "10px",
+  width: "320px",
+  boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+  textAlign: "center"
+};
+
+const input = {
+  width: "100%",
+  padding: "10px",
+  margin: "10px 0",
+  borderRadius: "5px",
+  border: "1px solid #ddd"
+};
+
+const loginBtn = {
+  width: "100%",
+  padding: "10px",
+  background: "#2563eb",
+  color: "white",
+  border: "none",
+  borderRadius: "5px",
+  cursor: "pointer"
+};
