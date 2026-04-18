@@ -62,7 +62,8 @@ const registerBtn = {
 
 const hero = {
   textAlign: "center",
-  marginTop: "80px"
+  paddingTop: "60px",   // controlled spacing
+  paddingBottom: "40px"
 };
 
 const title = {

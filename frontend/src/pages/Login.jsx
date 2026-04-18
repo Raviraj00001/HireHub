@@ -27,49 +27,46 @@ export default function Login() {
 
   return (
     <div style={container}>
-      <div style={card}>
-        <h2>Login</h2>
+  <div style={card}>
+    <h2 style={{ marginBottom: "20px" }}>Login</h2>
 
-        <input
-          placeholder="Email"
-          style={input}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+    <input
+      placeholder="Email"
+      style={input}
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+    />
 
-        <input
-          type="password"
-          placeholder="Password"
-          style={input}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+    <input
+      type="password"
+      placeholder="Password"
+      style={input}
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
 
-        <select
-          style={input}
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-        >
-          <option value="">Select Role</option>
-          <option value="seeker">Job Seeker</option>
-          <option value="recruiter">Recruiter</option>
-        </select>
+    <select
+      style={input}   // ✅ SAME STYLE as input
+      value={role}
+      onChange={(e) => setRole(e.target.value)}
+    >
+      <option value="">Select Role</option>
+      <option value="seeker">Job Seeker</option>
+      <option value="recruiter">Recruiter</option>
+    </select>
 
-        <button onClick={handleLogin} style={loginBtn}>
-          Login
-        </button>
+    <button onClick={handleLogin} style={button}>
+      Login
+    </button>
 
-        <p style={{ marginTop: "10px" }}>
-          New user?{" "}
-          <span
-            style={{ color: "#2563eb", cursor: "pointer" }}
-            onClick={() => navigate("/signup")}
-          >
-            Register
-          </span>
-        </p>
-      </div>
-    </div>
+    <p style={{ marginTop: "15px" }}>
+      New user?{" "}
+      <span style={link} onClick={() => navigate("/signup")}>
+        Register
+      </span>
+    </p>
+  </div>
+</div>
   );
 }
 
